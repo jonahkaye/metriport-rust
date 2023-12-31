@@ -22,7 +22,7 @@ const ORGANIZATION_URL: &str = "/organization";
 const BASE_ADDRESS: &str = "http://localhost:8080";
 const BASE_ADDRESS_SANDBOX: &str = "https://sandbox.metriport.com";
 
-pub struct SDK {
+pub struct MetriportSDK {
     client: Client,
     base_url: String,
     api_key: String,
@@ -36,7 +36,7 @@ pub struct Options {
     base_address: Option<String>,
 }
 
-impl SDK {
+impl MetriportSDK {
     pub fn new(api_key: String, options: Options) -> Self {
         // Set base_url based on options.sandbox and options.base_address
         let base_url = match (options.sandbox, options.base_address) {
