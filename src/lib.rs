@@ -1,4 +1,4 @@
-mod models;
+pub mod models;
 
 use reqwest::Client;
 use serde_derive::{Deserialize, Serialize};
@@ -30,10 +30,10 @@ pub struct MetriportSDK {
 
 #[allow(dead_code)]
 pub struct Options {
-    timeout: Option<u64>,
-    additional_headers: Option<HashMap<String, String>>,
-    sandbox: Option<bool>,
-    base_address: Option<String>,
+    pub timeout: Option<u64>,
+    pub additional_headers: Option<HashMap<String, String>>,
+    pub sandbox: Option<bool>,
+    pub base_address: Option<String>,
 }
 
 impl MetriportSDK {
