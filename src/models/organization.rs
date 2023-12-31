@@ -14,8 +14,7 @@ pub enum OrgType {
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct OrganizationCreate(String, OrgType, Address);
-
+pub struct OrganizationCreate(pub String, pub OrgType, pub Address);
 
 #[derive(Serialize, Deserialize)]
 pub struct Organization {
