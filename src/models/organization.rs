@@ -1,26 +1,34 @@
 use serde_derive::{Serialize, Deserialize};
 use crate::models::commons::address::Address;
-use crate::models::commons::base_update::BaseUpdate;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum OrgType {
+    #[serde(rename = "acuteCare")]
     AcuteCare,
+    #[serde(rename = "ambulatory")]
     Ambulatory,
+    #[serde(rename = "hospital")]
     Hospital,
+    #[serde(rename = "labSystems")]
     LabSystems,
+    #[serde(rename = "pharmacy")]
     Pharmacy,
+    #[serde(rename = "postAcuteCare")]
     PostAcuteCare,
     // Include other types as needed
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct OrganizationCreate(pub String, pub OrgType, pub Address);
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Organization {
-    #[serde(flatten)]
-    base: BaseUpdate,
+    id: String,
+    #[serde(rename = "eTag")]
+    e_tag: String,
     oid: String,
-    #[serde(flatten)]
-    create_data: OrganizationCreate,
+    name: String,
+    #[serde(rename = "type")]
+    org_type: OrgType,
+    location: Address,
 }

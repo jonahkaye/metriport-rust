@@ -1,10 +1,14 @@
 // tests/integration_test.rs
-use metriport_rust::{MetriportSDK, Options, models::organization::OrganizationCreate, models::commons::address::Address, models::organization::OrgType};
+use metriport_rust::{MetriportSDK, Options};
 use std::collections::HashMap;
+use dotenv::dotenv;
+use std::env;
+
 
 #[tokio::test]
-async fn test_create_organization() -> Result<(), Box<dyn std::error::Error>> {
-    let api_key = "you_api_key".to_string();
+async fn test_get_organization() -> Result<(), Box<dyn std::error::Error>> {
+    dotenv().ok();
+    let api_key = env::var("API_KEY").expect("API_KEY must be set");
 
     let options = Options {
         timeout: Some(30),
@@ -15,17 +19,8 @@ async fn test_create_organization() -> Result<(), Box<dyn std::error::Error>> {
 
     let sdk = MetriportSDK::new(api_key, options);
 
-    let address = Address {
-        address_line_1: "1211 Edris Dr".to_string(),
-        city: "LA".to_string(),
-        state: "CA".to_string(),
-        zip: "90035".to_string(),
-    };
-
-    let org_data = OrganizationCreate("Bayle Inc".to_string(), OrgType::AcuteCare, address);
-
-    let _organization = sdk.create_organization(org_data).await?;
-
-
+    let _organization = sdk.get_organization().await?;
+    println!("organization {:?}", _organization);
+    
     Ok(())
 }
